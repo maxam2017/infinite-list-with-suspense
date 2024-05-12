@@ -10,15 +10,10 @@ export const Joke = ({
 }: Stylable<{ joke: string }>) => {
   return (
     <div
-      className={cn(
-        "rounded-lg bg-white p-4 shadow dark:bg-gray-800",
-        className,
-      )}
+      className={cn("rounded-lg bg-white p-4 shadow", className)}
       style={style}
     >
-      <p className="text-lg font-medium text-gray-900 dark:text-gray-100">
-        {joke}
-      </p>
+      <p className="text-lg font-medium text-gray-900">{joke}</p>
     </div>
   );
 };

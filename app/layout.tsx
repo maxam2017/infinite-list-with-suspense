@@ -20,8 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex flex-col gap-4 p-4 md:p-8 min-h-screen max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 overflow-x-hidden">
-          <header className="flex items-center justify-between pt-3 pb-6">
+        <main className="flex flex-col gap-4 min-h-screen max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 overflow-x-hidden">
+          <header className="flex items-center justify-between pt-3 pb-4">
             <h1 className="text-2xl font-bold flex items-center">
               <Smile className="mx-2 w-6 h-6" /> Dad Jokes of the Day
             </h1>

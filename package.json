@@ -13,6 +13,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts",
     "prepare": "husky"
   },
+  "packageManager": "bun@1.1.4",
   "dependencies": {
     "clsx": "^2.1.1",
     "dayjs": "^1.11.11",

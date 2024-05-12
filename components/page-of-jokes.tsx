@@ -1,35 +1,22 @@
 "use client";
 
-import { Suspense, use } from "react";
-
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-
-import { Lazy } from "@/components/lazy";
+import { use } from "react";
 
 import { fetchJokes } from "../utils/api";
 import { Joke } from "./joke";
-import { Shimmer } from "./shimmer";
+import { Observer } from "./observer";
 
-const Error = ({ reset }: { reset: () => void }) => {
-  return (
-    <div className="text-sm text-center text-gray-400 py-4">
-      Failed to load more jokes. Please
-      <button
-        onClick={reset}
-        className="ml-1 underline cursor-pointer text-blue-600"
-      >
-        try again
-      </button>
-      .
-    </div>
-  );
-};
+interface PageOfJokesProps {
+  page: number;
+  onReachEnd?(info: { nextPage?: number }): void;
+}
 
-export const PageOfJokes = ({ page = 1 }: { page?: number }) => {
+export const PageOfJokes = ({ page, onReachEnd }: PageOfJokesProps) => {
   const { nextPage, items } = use(fetchJokes(page));
 
   return (
     <>
+      {/* list of jokes */}
       <div className="space-y-6" data-page={page}>
         {items.map(({ id, joke }, index) => {
           const delay = Math.ceil(index / 3) * 100;
@@ -43,22 +30,10 @@ export const PageOfJokes = ({ page = 1 }: { page?: number }) => {
             />
           );
         })}
-
-        {items.length === 0 && (
-          <div className="text-sm text-center text-gray-400 py-4">
-            No more jokes
-          </div>
-        )}
       </div>
-      {nextPage !== undefined && (
-        <Lazy>
-          <ErrorBoundary errorComponent={Error}>
-            <Suspense fallback={<Shimmer />}>
-              <PageOfJokes page={nextPage} />
-            </Suspense>
-          </ErrorBoundary>
-        </Lazy>
-      )}
+
+      {/* reach end observer */}
+      <Observer onIntersection={() => onReachEnd?.({ nextPage })} once={true} />
     </>
   );
 };

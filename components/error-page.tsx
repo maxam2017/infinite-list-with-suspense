@@ -2,14 +2,11 @@
 
 import { useEffect } from "react";
 
-import { Smile } from "lucide-react";
-
 interface ErrorPageProps {
   error?: Error & { digest?: string };
-  reset?: () => void;
 }
 
-export default function ErrorPage({ error, reset }: ErrorPageProps) {
+export default function ErrorPage({ error }: ErrorPageProps) {
   useEffect(() => {
     if (error) console.error(error);
   }, [error]);

@@ -4,10 +4,10 @@ import ErrorPage from "@/components/error-page";
 
 export default function Page({
   error,
-  reset,
+  reset: _reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  return <ErrorPage error={error} reset={reset} />;
+  return <ErrorPage error={error} />;
 }
